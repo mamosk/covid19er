@@ -7,7 +7,7 @@
         "PR": 452022,
         "PC": 287152,
         "RA": 389235,
-        "RT": 531891,
+        "RE": 531891,
         "RN": 339437
     };
     $^(data)[codice_regione=8][sigla_provincia]{sigla_provincia:$} ~>
