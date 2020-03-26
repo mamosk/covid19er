@@ -1,0 +1,24 @@
+version: '2.1'
+services:
+    nodered:
+        container_name: nodered
+        image: nodered/node-red:${NODE_RED_VERSION:-1.0.4}
+        env_file:
+            - ${ENV}
+        restart: unless-stopped
+        volumes:
+            - ${VOLUME}:/data
+        ports:
+            - ${PORT}:1880
+        logging:
+            driver: json-file
+            options:
+                max-size: '1m'
+                max-file: '50'
+        networks:
+            nodered:
+                aliases:
+                    - nodered
+networks:
+    nodered:
+        name: nodered  

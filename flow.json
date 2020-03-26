@@ -1,1 +1,239 @@
-[]
+[
+    {
+        "id": "4bc9aba1.e4aa34",
+        "type": "tab",
+        "label": "COVID-19 Emilia Romagna",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "4d221119.dbe8b",
+        "type": "inject",
+        "z": "4bc9aba1.e4aa34",
+        "name": "scheduled",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "*/5 17-19 * * *",
+        "once": false,
+        "onceDelay": "1",
+        "x": 75,
+        "y": 40,
+        "wires": [
+            [
+                "a0d7ec62.34af7"
+            ]
+        ],
+        "icon": "font-awesome/fa-clock-o",
+        "l": false
+    },
+    {
+        "id": "a0d7ec62.34af7",
+        "type": "http request",
+        "z": "4bc9aba1.e4aa34",
+        "name": "github protezione civile",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": false,
+        "url": "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-province.json",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 75,
+        "y": 120,
+        "wires": [
+            [
+                "6fd78492.c95f4c",
+                "f94a50cf.ad9f8"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "d5285a71.e67b58",
+        "type": "change",
+        "z": "4bc9aba1.e4aa34",
+        "name": "assoluto",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload^(data)[codice_regione=8][sigla_provincia]{sigla_provincia:$} ~>\t$each(function($pp){\t    $pp ~>\t    $map(function($e){\t        {\t            'data': $e.data ~> $substring(0,10),\t            $e.sigla_provincia: $e.totale_casi\t        }\t    })\t}) ~>\t$reduce(function($a,$b){\t    $zip($a,$b)\t}) ~>\t$map(function($z){\t    $z.** ~>\t    $filter(function($x){\t        $type($x)='object'\t    }) ~>\t    $merge\t})",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "${DATA}/assoluto.json",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "f14eefe7.d5607",
+                "64628edc.575a",
+                "b28330ff.e4453"
+            ]
+        ],
+        "icon": "node-red/parser-json.svg"
+    },
+    {
+        "id": "f14eefe7.d5607",
+        "type": "change",
+        "z": "4bc9aba1.e4aa34",
+        "name": "variazione",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload ~>\t$map(function($t,$i,$a) {\t    $t ~>\t    $each(function($v,$k) {\t        $k = 'data' ? {$k: $v} : {$k: $i=0 ? $v : $v - $lookup($a[$i-1],$k)}\t    }) ~>\t    $merge\t})",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "${DATA}/variazione.json",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 200,
+        "wires": [
+            [
+                "b28330ff.e4453"
+            ]
+        ],
+        "icon": "node-red/parser-json.svg"
+    },
+    {
+        "id": "6fd78492.c95f4c",
+        "type": "switch",
+        "z": "4bc9aba1.e4aa34",
+        "name": "status ok?",
+        "property": "statusCode",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "200",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 155,
+        "y": 120,
+        "wires": [
+            [
+                "d5285a71.e67b58"
+            ]
+        ],
+        "icon": "font-awesome/fa-check-circle",
+        "l": false
+    },
+    {
+        "id": "f94a50cf.ad9f8",
+        "type": "debug",
+        "z": "4bc9aba1.e4aa34",
+        "name": "debug response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 75,
+        "y": 200,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "64628edc.575a",
+        "type": "change",
+        "z": "4bc9aba1.e4aa34",
+        "name": "relativo",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "(\t    $abitanti:={\t        \"MO\": 705422,\t        \"BO\": 1017196,\t        \"FE\": 345691,\t        \"FC\": 394627,\t        \"PR\": 452022,\t        \"PC\": 287152,\t        \"RA\": 389235,\t        \"RE\": 531891,\t        \"RN\": 339437\t    };\t    payload ~>\t    $map(function($t,$i,$a) {\t        $t ~>\t        $each(function($v,$k) {\t            $k = 'data' ? {$k: $v} : {\t                $k: $v * 100 / $lookup($abitanti,$k)\t            }\t        }) ~>\t        $merge\t    })\t)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "${DATA}/relativo.json",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 260,
+        "y": 40,
+        "wires": [
+            [
+                "b28330ff.e4453"
+            ]
+        ],
+        "icon": "node-red/parser-json.svg"
+    },
+    {
+        "id": "b28330ff.e4453",
+        "type": "file",
+        "z": "4bc9aba1.e4aa34",
+        "name": "json file",
+        "filename": "",
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 435,
+        "y": 120,
+        "wires": [
+            [
+                "efd508f6.388588"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "efd508f6.388588",
+        "type": "debug",
+        "z": "4bc9aba1.e4aa34",
+        "name": "debug file content",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 495,
+        "y": 120,
+        "wires": [],
+        "l": false
+    }
+]
