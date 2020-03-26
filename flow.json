@@ -15,7 +15,7 @@
         "payload": "",
         "payloadType": "str",
         "repeat": "",
-        "crontab": "*/5 17-19 * * *",
+        "crontab": "*/5 16-21 * * *",
         "once": false,
         "onceDelay": "1",
         "x": 75,
@@ -25,7 +25,7 @@
                 "a0d7ec62.34af7"
             ]
         ],
-        "icon": "font-awesome/fa-clock-o",
+        "icon": "font-awesome/fa-calendar",
         "l": false
     },
     {
@@ -281,6 +281,44 @@
             ]
         ],
         "icon": "font-awesome/fa-eraser",
+        "l": false
+    },
+    {
+        "id": "45cf585b.db9ec8",
+        "type": "inject",
+        "z": "4bc9aba1.e4aa34",
+        "name": "now",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "1",
+        "x": 75,
+        "y": 280,
+        "wires": [
+            [
+                "ea37f143.84502"
+            ]
+        ],
+        "icon": "font-awesome/fa-clock-o",
+        "l": false
+    },
+    {
+        "id": "ea37f143.84502",
+        "type": "debug",
+        "z": "4bc9aba1.e4aa34",
+        "name": "debug now",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload~>$fromMillis",
+        "targetType": "jsonata",
+        "x": 555,
+        "y": 280,
+        "wires": [],
         "l": false
     }
 ]
