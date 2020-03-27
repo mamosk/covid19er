@@ -16,8 +16,8 @@
         "payloadType": "str",
         "repeat": "",
         "crontab": "*/5 16-21 * * *",
-        "once": false,
-        "onceDelay": "1",
+        "once": true,
+        "onceDelay": "0",
         "x": 75,
         "y": 40,
         "wires": [
