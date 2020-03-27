@@ -13,9 +13,9 @@ Un flow di [Node-RED](https://nodered.org/) con espressioni [JSONata](https://js
 Per lanciare il programma è necessaria una versione sufficientemente recente di [Docker](https://docs.docker.com/get-docker/).
 ### Ambiente
 Aggiungi un file `.env` con le seguenti variabili d'ambiente:
-- `PORT` = la porta su cui sarà visibile il programma su _localhost_
 - `VOLUME_DATA` = il percorso dell'host dove persistere il flow e gli altri dati di _Node-RED_
 - `VOLUME_RESULT` = il percorso dell'host dove persistere il risultato del programma
+- `PORT` = la porta su cui sarà visibile il programma su _localhost_ (opzionale, se non specificato è **1880**)
 ## Avvio
-Per lanciare il programma apri il terminale in questa cartella ed esegui il seguente comando:
+Per lanciare il programma apri il terminale nella directory del progetto ed esegui il seguente comando:
 ```docker-compose up -d```
