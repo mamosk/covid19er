@@ -5,9 +5,9 @@ Un flow di [Node-RED](https://nodered.org/) con espressioni [JSONata](https://js
 - dati graficati su [bit.ly/covid19er](https://bit.ly/covid19er)
 - dati in formato JSON su [bit.ly/covid19er-raw](https://bit.ly/covid19er-raw)
 ### Elenco
-- **assoluto**: totale contagiati;
-- **relativo**: percentuale contagiati sul totale abitanti;
-- **variazione**: variazione contagiati da giorno precedente.
+- **assoluto**: totale tamponi positivi;
+- **relativo**: percentuale tamponi positivi su abitanti;
+- **variazione**: variazione tamponi positivi da giorno precedente.
 ## Requisiti
 ### Software
 Per lanciare il programma è necessaria una versione sufficientemente recente di [Docker](https://docs.docker.com/get-docker/).
