@@ -10,7 +10,7 @@
         "id": "4d221119.dbe8b",
         "type": "inject",
         "z": "4bc9aba1.e4aa34",
-        "name": "scheduled",
+        "name": "scheduled fast",
         "topic": "",
         "payload": "",
         "payloadType": "str",
@@ -19,13 +19,13 @@
         "once": true,
         "onceDelay": "0",
         "x": 75,
-        "y": 40,
+        "y": 120,
         "wires": [
             [
                 "a0d7ec62.34af7"
             ]
         ],
-        "icon": "font-awesome/fa-calendar",
+        "icon": "font-awesome/fa-calendar-plus-o",
         "l": false
     },
     {
@@ -41,7 +41,7 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 75,
+        "x": 155,
         "y": 120,
         "wires": [
             [
@@ -77,7 +77,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
+        "x": 440,
         "y": 120,
         "wires": [
             [
@@ -114,7 +114,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 330,
+        "x": 450,
         "y": 200,
         "wires": [
             [
@@ -140,7 +140,7 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 155,
+        "x": 235,
         "y": 120,
         "wires": [
             [
@@ -161,8 +161,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 75,
-        "y": 200,
+        "x": 235,
+        "y": 40,
         "wires": [],
         "l": false
     },
@@ -192,7 +192,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
+        "x": 440,
         "y": 40,
         "wires": [
             [
@@ -211,8 +211,8 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 615,
-        "y": 120,
+        "x": 695,
+        "y": 200,
         "wires": [
             [
                 "efd508f6.388588"
@@ -231,7 +231,7 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 675,
+        "x": 775,
         "y": 120,
         "wires": [],
         "l": false
@@ -273,7 +273,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 215,
+        "x": 315,
         "y": 120,
         "wires": [
             [
@@ -296,7 +296,7 @@
         "once": false,
         "onceDelay": "1",
         "x": 75,
-        "y": 280,
+        "y": 200,
         "wires": [
             [
                 "ea37f143.84502"
@@ -310,14 +310,14 @@
         "type": "debug",
         "z": "4bc9aba1.e4aa34",
         "name": "debug now",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload~>$fromMillis",
         "targetType": "jsonata",
-        "x": 675,
-        "y": 280,
+        "x": 235,
+        "y": 200,
         "wires": [],
         "l": false
     },
@@ -331,7 +331,7 @@
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 495,
+        "x": 615,
         "y": 120,
         "wires": [
             [
@@ -376,14 +376,36 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 555,
-        "y": 120,
+        "x": 695,
+        "y": 40,
         "wires": [
             [
                 "b28330ff.e4453"
             ]
         ],
         "icon": "node-red/file.svg",
+        "l": false
+    },
+    {
+        "id": "f3d2d5ed.a21a48",
+        "type": "inject",
+        "z": "4bc9aba1.e4aa34",
+        "name": "scheduled slow",
+        "topic": "",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "*/30 6-14 * * *",
+        "once": false,
+        "onceDelay": "0",
+        "x": 75,
+        "y": 40,
+        "wires": [
+            [
+                "a0d7ec62.34af7"
+            ]
+        ],
+        "icon": "font-awesome/fa-calendar-minus-o",
         "l": false
     }
 ]

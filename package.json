@@ -1,7 +1,7 @@
 {
     "name": "covid19er",
     "description": "COVID-19 Emilia Romagna",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "dependencies": {},
     "node-red": {
         "settings": {
