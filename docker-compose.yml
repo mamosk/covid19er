@@ -10,7 +10,7 @@ services:
             - ${VOLUME_DATA}:/data
             - ${VOLUME_RESULT}:/result
         ports:
-            - ${PORT}:1880
+            - ${PORT:-1880}:1880
         logging:
             driver: json-file
             options:
