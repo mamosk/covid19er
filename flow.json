@@ -66,10 +66,10 @@
             },
             {
                 "t": "set",
-                "p": "filename",
+                "p": "topic",
                 "pt": "msg",
-                "to": "${DATA}/assoluto.json",
-                "tot": "env"
+                "to": "assoluto",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -83,7 +83,7 @@
             [
                 "f14eefe7.d5607",
                 "64628edc.575a",
-                "b28330ff.e4453"
+                "87b5f854.d28028"
             ]
         ],
         "icon": "node-red/parser-json.svg"
@@ -103,10 +103,10 @@
             },
             {
                 "t": "set",
-                "p": "filename",
+                "p": "topic",
                 "pt": "msg",
-                "to": "${DATA}/variazione.json",
-                "tot": "env"
+                "to": "variazione",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -118,7 +118,7 @@
         "y": 200,
         "wires": [
             [
-                "b28330ff.e4453"
+                "87b5f854.d28028"
             ]
         ],
         "icon": "node-red/parser-json.svg"
@@ -181,10 +181,10 @@
             },
             {
                 "t": "set",
-                "p": "filename",
+                "p": "topic",
                 "pt": "msg",
-                "to": "${DATA}/relativo.json",
-                "tot": "env"
+                "to": "relativo",
+                "tot": "str"
             }
         ],
         "action": "",
@@ -196,7 +196,7 @@
         "y": 40,
         "wires": [
             [
-                "b28330ff.e4453"
+                "87b5f854.d28028"
             ]
         ],
         "icon": "node-red/parser-json.svg"
@@ -211,7 +211,7 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 495,
+        "x": 615,
         "y": 120,
         "wires": [
             [
@@ -225,13 +225,13 @@
         "type": "debug",
         "z": "4bc9aba1.e4aa34",
         "name": "debug file content",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 555,
+        "x": 675,
         "y": 120,
         "wires": [],
         "l": false
@@ -310,15 +310,80 @@
         "type": "debug",
         "z": "4bc9aba1.e4aa34",
         "name": "debug now",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "payload~>$fromMillis",
         "targetType": "jsonata",
-        "x": 555,
+        "x": 675,
         "y": 280,
         "wires": [],
+        "l": false
+    },
+    {
+        "id": "87b5f854.d28028",
+        "type": "rbe",
+        "z": "4bc9aba1.e4aa34",
+        "name": "pass on change only",
+        "func": "rbei",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 495,
+        "y": 120,
+        "wires": [
+            [
+                "7a099dcc.e55644"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "7a099dcc.e55644",
+        "type": "change",
+        "z": "4bc9aba1.e4aa34",
+        "name": "filename",
+        "rules": [
+            {
+                "t": "set",
+                "p": "path",
+                "pt": "msg",
+                "to": "DATA",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "filename",
+                "pt": "msg",
+                "to": "$env('DATA')&($env('DATA')~>/\\/$/?'':'/')&topic&'.json'",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "path",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "topic",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 555,
+        "y": 120,
+        "wires": [
+            [
+                "b28330ff.e4453"
+            ]
+        ],
+        "icon": "node-red/file.svg",
         "l": false
     }
 ]
