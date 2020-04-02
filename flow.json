@@ -11,7 +11,7 @@
         "type": "inject",
         "z": "4bc9aba1.e4aa34",
         "name": "scheduled fast",
-        "topic": "",
+        "topic": "sheduled",
         "payload": "",
         "payloadType": "str",
         "repeat": "",
@@ -19,7 +19,7 @@
         "once": true,
         "onceDelay": "0",
         "x": 75,
-        "y": 120,
+        "y": 200,
         "wires": [
             [
                 "a0d7ec62.34af7"
@@ -41,8 +41,8 @@
         "persist": false,
         "proxy": "",
         "authType": "",
-        "x": 155,
-        "y": 120,
+        "x": 195,
+        "y": 200,
         "wires": [
             [
                 "6fd78492.c95f4c",
@@ -77,13 +77,13 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 440,
-        "y": 120,
+        "x": 560,
+        "y": 200,
         "wires": [
             [
                 "f14eefe7.d5607",
                 "64628edc.575a",
-                "87b5f854.d28028"
+                "e202c36e.398db"
             ]
         ],
         "icon": "node-red/parser-json.svg"
@@ -114,11 +114,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 450,
-        "y": 200,
+        "x": 570,
+        "y": 280,
         "wires": [
             [
-                "87b5f854.d28028"
+                "e202c36e.398db"
             ]
         ],
         "icon": "node-red/parser-json.svg"
@@ -140,8 +140,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 235,
-        "y": 120,
+        "x": 315,
+        "y": 200,
         "wires": [
             [
                 "642ea387.70e07c"
@@ -161,8 +161,8 @@
         "tostatus": false,
         "complete": "true",
         "targetType": "full",
-        "x": 235,
-        "y": 40,
+        "x": 315,
+        "y": 120,
         "wires": [],
         "l": false
     },
@@ -192,11 +192,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 440,
-        "y": 40,
+        "x": 560,
+        "y": 120,
         "wires": [
             [
-                "87b5f854.d28028"
+                "e202c36e.398db"
             ]
         ],
         "icon": "node-red/parser-json.svg"
@@ -211,7 +211,7 @@
         "createDir": true,
         "overwriteFile": "true",
         "encoding": "none",
-        "x": 695,
+        "x": 975,
         "y": 200,
         "wires": [
             [
@@ -231,8 +231,8 @@
         "tostatus": false,
         "complete": "payload",
         "targetType": "msg",
-        "x": 775,
-        "y": 120,
+        "x": 1055,
+        "y": 200,
         "wires": [],
         "l": false
     },
@@ -243,9 +243,11 @@
         "name": "clean",
         "rules": [
             {
-                "t": "delete",
+                "t": "move",
                 "p": "topic",
-                "pt": "msg"
+                "pt": "msg",
+                "to": "origin",
+                "tot": "msg"
             },
             {
                 "t": "delete",
@@ -273,8 +275,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 315,
-        "y": 120,
+        "x": 415,
+        "y": 200,
         "wires": [
             [
                 "d5285a71.e67b58"
@@ -296,7 +298,7 @@
         "once": false,
         "onceDelay": "1",
         "x": 75,
-        "y": 200,
+        "y": 40,
         "wires": [
             [
                 "ea37f143.84502"
@@ -316,8 +318,8 @@
         "tostatus": false,
         "complete": "payload~>$fromMillis",
         "targetType": "jsonata",
-        "x": 235,
-        "y": 200,
+        "x": 315,
+        "y": 40,
         "wires": [],
         "l": false
     },
@@ -331,8 +333,8 @@
         "start": "",
         "inout": "out",
         "property": "payload",
-        "x": 615,
-        "y": 120,
+        "x": 855,
+        "y": 280,
         "wires": [
             [
                 "7a099dcc.e55644"
@@ -376,8 +378,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 695,
-        "y": 40,
+        "x": 855,
+        "y": 120,
         "wires": [
             [
                 "b28330ff.e4453"
@@ -391,7 +393,7 @@
         "type": "inject",
         "z": "4bc9aba1.e4aa34",
         "name": "scheduled slow",
-        "topic": "",
+        "topic": "sheduled",
         "payload": "",
         "payloadType": "str",
         "repeat": "",
@@ -399,13 +401,67 @@
         "once": false,
         "onceDelay": "0",
         "x": 75,
-        "y": 40,
+        "y": 120,
         "wires": [
             [
                 "a0d7ec62.34af7"
             ]
         ],
         "icon": "font-awesome/fa-calendar-minus-o",
+        "l": false
+    },
+    {
+        "id": "9dfa8ebc.c7341",
+        "type": "inject",
+        "z": "4bc9aba1.e4aa34",
+        "name": "manual",
+        "topic": "manual",
+        "payload": "",
+        "payloadType": "str",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "x": 75,
+        "y": 280,
+        "wires": [
+            [
+                "a0d7ec62.34af7"
+            ]
+        ],
+        "icon": "font-awesome/fa-hand-o-right",
+        "l": false
+    },
+    {
+        "id": "e202c36e.398db",
+        "type": "switch",
+        "z": "4bc9aba1.e4aa34",
+        "name": "manual?",
+        "property": "origin",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "manual",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 735,
+        "y": 200,
+        "wires": [
+            [
+                "7a099dcc.e55644"
+            ],
+            [
+                "87b5f854.d28028"
+            ]
+        ],
         "l": false
     }
 ]
