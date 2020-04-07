@@ -2,7 +2,9 @@
     "name": "covid19er",
     "description": "COVID-19 Emilia Romagna",
     "version": "1.0.0",
-    "dependencies": {},
+    "dependencies": {
+        "node-red-node-rbe": "0.2.8"
+    },
     "node-red": {
         "settings": {
             "flowFile": "flow.json",
