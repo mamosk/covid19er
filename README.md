@@ -18,4 +18,6 @@ Aggiungi un file `.env` con le seguenti variabili d'ambiente:
 - `PORT` = la porta su cui sarà visibile il programma su _localhost_ (opzionale, se non specificato è **1880**)
 ## Avvio
 Per lanciare il programma apri il terminale nella directory del progetto ed esegui il seguente comando:
-```docker-compose up -d```
+```
+docker-compose up -d
+```
